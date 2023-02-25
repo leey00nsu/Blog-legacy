@@ -2,6 +2,7 @@ import React from "react";
 import WindowHeaderButton from "./WindowHeaderButton";
 
 const WindowHeader = () => {
+  const headerButtonHandler = () => {};
   const currentTime = new Intl.DateTimeFormat("ko", {
     dateStyle: "full",
     timeStyle: "short",
@@ -16,10 +17,14 @@ const WindowHeader = () => {
         />
         <section className="flex items-center justify-between h-full text-white grow">
           <div className="h-full">
-            <WindowHeaderButton>LEEYOONSU</WindowHeaderButton>
+            <WindowHeaderButton onClick={headerButtonHandler}>
+              LEEYOONSU
+            </WindowHeaderButton>
           </div>
           <div className="h-full">
-            <WindowHeaderButton box>GitHub</WindowHeaderButton>
+            <WindowHeaderButton onClick={headerButtonHandler} box>
+              GitHub
+            </WindowHeaderButton>
           </div>
         </section>
         <div className="text-white whitespace-nowrap">{currentTime}</div>

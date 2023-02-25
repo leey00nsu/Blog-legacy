@@ -1,4 +1,10 @@
-const WindowHeaderButton = (props) => {
+interface WindowHeaderButtonProps {
+  box: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+const WindowHeaderButton = (props: WindowHeaderButtonProps) => {
   const buttonStyle = props.box
     ? "px-2 text-base text-black bg-white rounded-md drop-shadow-md"
     : "px-2 text-base text-white drop-shadow-md";
