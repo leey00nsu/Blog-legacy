@@ -6,7 +6,7 @@ const WindowHeader = () => {
   const headerButtonHandler = () => {};
 
   return (
-    <header className="w-screen h-10 bg-gradient-to-r from-gray-500/30 to-gray-700/30 backdrop-blur-md ">
+    <header className="flex w-screen h-10 bg-gradient-to-r from-gray-500/30 to-gray-700/30 backdrop-blur-md ">
       <nav className="flex items-center justify-between w-full h-full px-5">
         <img
           className="object-cover h-6"
