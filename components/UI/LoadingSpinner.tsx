@@ -1,8 +1,26 @@
-const LoadingSpinner = () => {
+interface LoadingSpinnerProps {
+  size: string;
+  full: boolean;
+}
+
+const LoadingSpinner = (props: LoadingSpinnerProps) => {
+  let svgClass;
+  if (props.size === "sm") {
+    svgClass =
+      "w-6 h-6 text-gray-100/50 animate-spin dark:text-gray-600 fill-blue-600/50 ";
+  } else if (props.size === "lg") {
+    svgClass =
+      "w-16 h-16 text-gray-100/50 animate-spin dark:text-gray-600 fill-blue-600/50 ";
+  }
+
+  if (props.full === true) {
+    svgClass += "absolute left-2/4 top-2/4 -ml-8 -mt-8";
+  }
+
   return (
     <svg
       aria-hidden="true"
-      className="w-6 h-6  text-gray-100/50 animate-spin dark:text-gray-600 fill-blue-600/50"
+      className={svgClass}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +35,11 @@ const LoadingSpinner = () => {
       />
     </svg>
   );
+};
+
+LoadingSpinner.defaultProps = {
+  size: "sm",
+  full: false,
 };
 
 export default LoadingSpinner;

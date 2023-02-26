@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col w-screen h-screen bg-cover wallpaper ">
+    <div className="flex flex-col w-screen h-screen bg-cover wallpaper max-h-screen">
       <WindowHeader />
       <Apps />
       <WindowDock />
