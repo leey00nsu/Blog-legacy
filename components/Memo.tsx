@@ -17,22 +17,6 @@ const Memo = () => {
         <article>aa</article>
         <article>aa</article>
         <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
-        <article>aa</article>
       </article>
     </AppLayout>
   );

@@ -3,20 +3,19 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 
 import { ExtendedRecordMap } from "notion-types";
-import { getPageTitle } from "notion-utils";
 import { NotionRenderer } from "react-notion-x";
-import { Code } from "react-notion-x/build/third-party/code";
-import { Collection } from "react-notion-x/build/third-party/collection";
-import { Equation } from "react-notion-x/build/third-party/equation";
-import { Modal } from "react-notion-x/build/third-party/modal";
-import { Pdf } from "react-notion-x/build/third-party/pdf";
+import Link from "next/link";
 
 export const NotionPage = ({
+  pageTitle,
   recordMap,
   rootPageId,
+  pageInfo,
 }: {
+  pageTitle: string;
   recordMap: ExtendedRecordMap;
   rootPageId?: string;
+  pageInfo: { [key: string]: string };
 }) => {
   if (!recordMap) {
     return null;
@@ -46,10 +45,8 @@ export const NotionPage = ({
     }
   );
 
-  const title = getPageTitle(recordMap);
-
-  const mapPageUrl = (title: string) => {
-    return "/memo/" + title;
+  const mapPageUrl = (id: string) => {
+    return `/memo/${pageInfo[id]}`;
   };
 
   return (
@@ -57,16 +54,18 @@ export const NotionPage = ({
       <Head>
         <meta name="description" content="LEEYOONSU BLOG" />
 
-        <title>{title}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <NotionRenderer
+        isShowingSearch={true}
         components={{
           Code,
           Collection,
           Equation,
           Modal,
           Pdf,
+          nextLink: Link,
         }}
         recordMap={recordMap}
         fullPage={true}
