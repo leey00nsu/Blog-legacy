@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 const HomePage = () => {
   const router = useRouter();
   const [isFetched, setIsFetched] = useState(false);
+
   useEffect(() => {
     if (typeof sessionStorage === "undefined") {
       return;

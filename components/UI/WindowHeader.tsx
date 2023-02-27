@@ -11,7 +11,7 @@ const WindowHeader = () => {
       <nav className="flex items-center justify-between w-full h-full px-5">
         <WindowHeaderButton onClick={headerButtonHandler}>
           <Image
-            className="object-cover "
+            className="object-cover w-5"
             src="/Apple_logo_white.svg"
             alt="apple logo"
             width={20}

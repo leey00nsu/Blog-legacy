@@ -14,10 +14,11 @@ interface pageItems {
   pageInfo: { [key: string]: string };
 }
 
-export default function Page() {
+export default function Page(props: any) {
   const router = useRouter();
   const [page, setPage] = useState<pageItems>();
   const [is404, setIs404] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       const slug = router.query.slug as string[];
@@ -59,13 +60,13 @@ export default function Page() {
         recordMap: page.recordMap,
         pageInfo: pageInfo.pageInfo,
       });
+      sessionStorage.setItem("isLoaded", "true");
+      props.adjust();
     };
-    if (!is404) {
-      fetchData();
-    }
-  }, [router]);
+    fetchData();
+  }, [props.isAdjusted]);
 
-  if (!page && !is404) {
+  if (!props.isAdjusted) {
     return <LoadingSpinner size="lg" full />;
   }
 

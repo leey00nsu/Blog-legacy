@@ -4,7 +4,9 @@ import dynamic from "next/dynamic";
 
 import { ExtendedRecordMap } from "notion-types";
 import { NotionRenderer } from "react-notion-x";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export const NotionPage = ({
   pageTitle,
@@ -45,6 +47,8 @@ export const NotionPage = ({
     }
   );
 
+  const router = useRouter();
+
   const mapPageUrl = (id: string) => {
     return `/memo/${pageInfo[id]}`;
   };
@@ -65,6 +69,7 @@ export const NotionPage = ({
           Equation,
           Modal,
           Pdf,
+          nextImage: Image,
           nextLink: Link,
         }}
         recordMap={recordMap}
