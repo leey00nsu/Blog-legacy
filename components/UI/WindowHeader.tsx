@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import WindowHeaderButton from "./WindowHeaderButton";
 import WindowHeaderTimer from "./WindowHeaderTimer";
+import Image from "next/image";
 
 const WindowHeader = () => {
   const headerButtonHandler = () => {};
@@ -9,10 +10,12 @@ const WindowHeader = () => {
     <header className="flex w-screen h-10 bg-gradient-to-r from-gray-500/30 to-gray-700/30 backdrop-blur-md shrink-0">
       <nav className="flex items-center justify-between w-full h-full px-5">
         <WindowHeaderButton onClick={headerButtonHandler}>
-          <img
-            className="object-cover h-6"
-            src="Apple_logo_white.svg"
+          <Image
+            className="object-cover "
+            src="/Apple_logo_white.svg"
             alt="apple logo"
+            width={20}
+            height={15}
           />
         </WindowHeaderButton>
 

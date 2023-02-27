@@ -10,7 +10,8 @@ const Apps = () => {
   );
 
   const router = useRouter();
-  if (router.query.index === "memo") {
+  const slug = router.query.slug as string[];
+  if (slug && slug[0] === "memo") {
     return <Memo />;
   }
 

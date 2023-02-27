@@ -5,8 +5,9 @@ import { useRouter } from "next/router";
 const WindowDock = () => {
   const router = useRouter();
   const dockButtonHandler = () => {
-    if (router.query.index !== "memo") {
-      router.replace("/memo");
+    const slug = router.query.slug as string[];
+    if (slug[0] !== "memo") {
+      router.replace("/memo/코딩테스트");
     } else {
       router.replace("/");
     }
