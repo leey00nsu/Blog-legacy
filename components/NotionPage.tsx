@@ -47,8 +47,6 @@ export const NotionPage = ({
     }
   );
 
-  const router = useRouter();
-
   const mapPageUrl = (id: string) => {
     return `/memo/${pageInfo[id]}`;
   };

@@ -8,20 +8,7 @@ import { useRouter } from "next/router";
 
 const Page = dynamic(() => import("./Page"));
 
-interface NextLinkProps {
-  href: string;
-  children: React.ReactNode;
-}
-
-function NextLink(props: NextLinkProps) {
-  return (
-    <Link href={props.href} as={props.href}>
-      <span>{props.children}</span>
-    </Link>
-  );
-}
-
-const Memo = React.memo((props: any) => {
+const Memo = (props: any) => {
   return (
     <AppLayout>
       <article
@@ -32,7 +19,7 @@ const Memo = React.memo((props: any) => {
       </article>
     </AppLayout>
   );
-});
+};
 
 export default function WrappedComponent(props: any) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -44,7 +31,7 @@ export default function WrappedComponent(props: any) {
     setIsAdjusted(false);
   }, [router]);
 
-  function pushPage(e) {
+  function pushPage(e: any) {
     let id;
     if (e.target.id) {
       id = e.target.id;
@@ -77,11 +64,11 @@ export default function WrappedComponent(props: any) {
         const div = document.createElement("div");
         div.className = aTag.className;
         div.onclick = pushPage;
-        div.id = href;
+        div.id = href!;
         while (aTag.firstChild) {
           div.appendChild(aTag.firstChild);
         }
-        aTag.parentNode.insertBefore(div, aTag);
+        aTag.parentNode?.insertBefore(div, aTag);
         aTag.remove();
       }
 

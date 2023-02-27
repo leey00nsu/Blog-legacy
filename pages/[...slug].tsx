@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 
 const HomePage = () => {
   const router = useRouter();
-  const [isFetched, setIsFetched] = useState(false);
 
   useEffect(() => {
     if (typeof sessionStorage === "undefined") {
@@ -16,11 +15,10 @@ const HomePage = () => {
     const item = sessionStorage.getItem("pageInfo");
 
     const fetchData = async () => {
-      if (isFetched) {
+      if (item) {
         return;
       }
       if (!item) {
-        setIsFetched(true);
         const response = await fetch(`/api/getAllPages`);
 
         const pageInfo = await response.json();
