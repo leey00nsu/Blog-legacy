@@ -38,6 +38,7 @@ export const NotionPage = ({
     return null;
   }
 
+  // prismjs : 코드 블럭 하이라이팅
   const Code = dynamic(() =>
     import("react-notion-x/build/third-party/code").then(async (m) => {
       await Promise.all([

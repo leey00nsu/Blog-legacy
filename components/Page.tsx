@@ -14,6 +14,9 @@ interface pageItems {
   pageInfo: { [key: string]: string };
 }
 
+// NotionPage를 렌더링하기 위한 경유 컴포넌트입니다.
+// 세션스토리지에 저장되어있는 노션링크를 확인하여 해당 한글경로로 api를 요청하여
+// 해당 노션페이지를 받아옵니다.
 export default function Page(props: any) {
   const router = useRouter();
   const [page, setPage] = useState<pageItems>();
@@ -82,5 +85,6 @@ export default function Page(props: any) {
     );
   }
 
+  //Todo: 404 페이지
   return <></>;
 }

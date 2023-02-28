@@ -11,7 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // 전체 페이지를 순회하여 링크를 모아 객체로 만듭니다.
+  // 전체 페이지를 순회하여 노션링크:한글경로 키:값 을 갖는 객체로 만듭니다.
   const traversePage = async () => {
     let pageInfo: pageInfo = {};
     let queue: string[] = [rootNotionPageId];

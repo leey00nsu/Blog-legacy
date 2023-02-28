@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
+// [...slug] 를 이용해 모든 url에 대해 입력받고 렌더링합니다.
+// 이때 세션스토리지에 pageInfo 객체를 확인하는데 , pageInfo에는 "노션링크":"한글경로"가 할당되어 있습니다.
 const HomePage = () => {
   const router = useRouter();
 

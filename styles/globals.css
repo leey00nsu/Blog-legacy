@@ -6,6 +6,7 @@
   background-image: url("/ventura.jpg");
 }
 
+/* react-notion-x 기본 css 오버라이드 */
 .notion-page-cover {
   @apply rounded-3xl;
 }

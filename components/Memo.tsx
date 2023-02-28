@@ -23,6 +23,10 @@ const Memo = (props: any) => {
   );
 };
 
+
+// Page를 통해 NotionPage가 렌더링되는데 , 최종적으로 해당 컴포넌트에서 html를 조회하여
+// 모든 a태그를 div태그로 변경하고 onclick 이벤트로 교체합니다.
+// Link from next/link와 같은 동작을 하도록 의도되었습니다.
 export default function WrappedComponent(props: any) {
   const [isAdjusted, setIsAdjusted] = useState(false);
   const { children, ...rest } = props;
