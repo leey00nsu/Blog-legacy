@@ -16,7 +16,7 @@ const Memo = (props: any) => {
         id="content"
         className="flex flex-col items-center w-full my-4 overflow-y-auto"
       >
-        {!props.isAdjusted &&<LoadingSpinner size="lg" full />}
+        {!props.isAdjusted && <LoadingSpinner size="lg" full />}
         <Page adjust={props.adjustHTML} isAdjusted={props.isAdjusted} />
       </article>
     </AppLayout>
@@ -28,9 +28,21 @@ export default function WrappedComponent(props: any) {
   const { children, ...rest } = props;
   const router = useRouter();
 
-  useEffect(() => {
+  // 경로 이동 시 페이지의 hidden 클래스를 추가하여 보이지 않게 합니다.
+  const resetAdjust = () => {
+    const adjustChecker = document.querySelector("#adjust_checker");
+    if (adjustChecker) {
+      adjustChecker.className = "hidden";
+    }
     setIsAdjusted(false);
     sessionStorage.setItem("isLoaded", "false");
+  };
+
+  useEffect(() => {
+    resetAdjust();
+    return () => {
+      resetAdjust();
+    };
   }, [router]);
 
   function pushPage(e: any) {
@@ -43,8 +55,8 @@ export default function WrappedComponent(props: any) {
       if (div) {
         id = div.id;
       }
+      // 페이지를 클릭하면 페이지 조정을 하기 전까지 가립니다.
     }
-    // 페이지를 클릭하면 페이지 조정을 하기 전까지 가립니다.
     const adjustChecker = document.querySelector("#adjust_checker")!;
     adjustChecker.className = "hidden";
 
@@ -68,7 +80,7 @@ export default function WrappedComponent(props: any) {
         const aTag = aTags[i];
         const href = aTag.getAttribute("href");
         const div = document.createElement("div");
-        div.className = aTag.className+" hover:cursor-pointer";
+        div.className = aTag.className + " hover:cursor-pointer";
         div.onclick = pushPage;
         div.id = href!;
         while (aTag.firstChild) {
