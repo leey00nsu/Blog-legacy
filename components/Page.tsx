@@ -60,20 +60,17 @@ export default function Page(props: any) {
         recordMap: page.recordMap,
         pageInfo: pageInfo.pageInfo,
       });
-      sessionStorage.setItem("isLoaded", "true");
-      props.adjust();
+      sessionStorage.setItem("isLoaded", "pending");
     };
-    fetchData();
+    if (props.isAdjusted === false) {
+      fetchData();
+    }
   }, [props.isAdjusted]);
 
-  if (!props.isAdjusted) {
-    return <LoadingSpinner size="lg" full />;
-  }
-
-  //  console.log(page);
   if (page && !is404) {
     return (
       <NotionPage
+        adjust={props.adjust}
         recordMap={page["recordMap"]}
         pageTitle={page["pageTitle"]}
         rootPageId={page["pageId"]}
@@ -82,5 +79,5 @@ export default function Page(props: any) {
     );
   }
 
-  return <div>404 Error</div>;
+  return <LoadingSpinner size="lg" full />;
 }

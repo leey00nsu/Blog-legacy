@@ -19,6 +19,7 @@ const LoadingSpinner = (props: LoadingSpinnerProps) => {
 
   return (
     <svg
+      id="loading_spinner"
       aria-hidden="true"
       className={svgClass}
       viewBox="0 0 100 101"

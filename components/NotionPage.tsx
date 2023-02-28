@@ -8,19 +8,28 @@ import { ExtendedRecordMap } from "notion-types";
 import { NotionRenderer } from "react-notion-x";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export const NotionPage = ({
   pageTitle,
   recordMap,
   rootPageId,
   pageInfo,
+  adjust,
 }: {
   pageTitle: string;
   recordMap: ExtendedRecordMap;
   rootPageId?: string;
   pageInfo: { [key: string]: string };
+  adjust: () => void;
 }) => {
+  useEffect(() => {
+    const isLoaded = sessionStorage.getItem("isLoaded");
+    if (isLoaded === "pending") {
+      adjust();
+    }
+  }, [recordMap]);
+
   if (!recordMap) {
     return null;
   }
@@ -96,23 +105,25 @@ export const NotionPage = ({
         <title>{pageTitle}</title>
       </Head>
 
-      <NotionRenderer
-        isShowingSearch={true}
-        components={{
-          Code,
-          Collection,
-          Equation,
-          Modal,
-          Pdf,
-          nextImage: Image,
-          nextLink: Link,
-        }}
-        recordMap={recordMap}
-        fullPage={true}
-        darkMode={false}
-        rootPageId={rootPageId}
-        mapPageUrl={mapPageUrl}
-      />
+      <div className="hidden" id="adjust_checker">
+        <NotionRenderer
+          isShowingSearch={true}
+          components={{
+            Code,
+            Collection,
+            Equation,
+            Modal,
+            Pdf,
+            nextImage: Image,
+            nextLink: Link,
+          }}
+          recordMap={recordMap}
+          fullPage={true}
+          darkMode={false}
+          rootPageId={rootPageId}
+          mapPageUrl={mapPageUrl}
+        />
+      </div>
     </>
   );
 };

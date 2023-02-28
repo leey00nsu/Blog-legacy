@@ -3,6 +3,7 @@ import WindowDock from "../components/UI/WindowDock";
 import Apps from "../components/Apps";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const HomePage = () => {
   const router = useRouter();
@@ -28,13 +29,20 @@ const HomePage = () => {
       }
     };
     fetchData();
-  }, [router]);
+  }, []);
   return (
-    <div className="flex flex-col w-screen h-screen bg-cover wallpaper max-h-screen">
-      <WindowHeader />
-      <Apps />
-      <WindowDock />
-    </div>
+    <>
+      <Head>
+        <meta name="description" content="LEEYOONSU BLOG" />
+        <link rel="icon" href="/favicon.ico" />
+        <title>LEEYOONSU BLOG</title>
+      </Head>
+      <div className="flex flex-col w-screen h-screen bg-cover wallpaper max-h-screen">
+        <WindowHeader />
+        <Apps />
+        <WindowDock />
+      </div>
+    </>
   );
 };
 
