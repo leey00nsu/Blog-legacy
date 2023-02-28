@@ -29,7 +29,10 @@ export default function Page(props: any) {
       const pageInfo = JSON.parse(sessionStorage.getItem("pageInfo")!);
 
       // 세션 스토리지에 페이지 내용이 없다면 리턴
-      if (!pageInfo) return;
+      if (!pageInfo) {
+        setTimeout(fetchData, 100);
+        return;
+      }
 
       // 현재 url의 값으로 해당 값과 일치하는 pageId를 찾습니다.
       const pageId = Object.keys(pageInfo.pageInfo).find(
@@ -79,5 +82,5 @@ export default function Page(props: any) {
     );
   }
 
-  return <LoadingSpinner size="lg" full />;
+  return <></>;
 }
