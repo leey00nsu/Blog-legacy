@@ -23,7 +23,6 @@ export const NotionPage = ({
   pageInfo: { [key: string]: string };
   adjust: () => void;
 }) => {
-  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     const isLoaded = sessionStorage.getItem("isLoaded");

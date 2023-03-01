@@ -84,16 +84,6 @@ export default function WrappedComponent(props: any) {
       for (let i = 0; i < aTags.length; i++) {
         const aTag = aTags[i];
         aTag.onclick = pushPage;
-        // const href = aTag.getAttribute("href");
-        // const div = document.createElement("div");
-        // div.className = aTag.className + " hover:cursor-pointer";
-        // div.onclick = pushPage;
-        // div.id = href!;
-        // while (aTag.firstChild) {
-        //   div.appendChild(aTag.firstChild);
-        // }
-        // aTag.parentNode?.insertBefore(div, aTag);
-        // aTag.remove();
       }
 
       const contentElement = document.getElementById("content");
