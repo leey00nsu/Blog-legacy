@@ -5,10 +5,11 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 
 import { ExtendedRecordMap } from "notion-types";
-import { NotionRenderer } from "react-notion-x";
+import { NotionRenderer } from "../lib/react-notion-x/src";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { searchNotion } from "../lib/search-notion";
 
 export const NotionPage = ({
   pageTitle,
@@ -23,15 +24,12 @@ export const NotionPage = ({
   pageInfo: { [key: string]: string };
   adjust: () => void;
 }) => {
-
   useEffect(() => {
     const isLoaded = sessionStorage.getItem("isLoaded");
     if (isLoaded === "pending") {
       adjust();
     }
   }, [recordMap]);
-
-
 
   if (!recordMap) {
     return null;
@@ -111,7 +109,7 @@ export const NotionPage = ({
 
       <div className="hidden" id="adjust_checker">
         <NotionRenderer
-          isShowingSearch={true}
+          searchNotion={searchNotion}
           components={{
             Code,
             Collection,
@@ -121,6 +119,7 @@ export const NotionPage = ({
             nextImage: Image,
             nextLink: Link,
           }}
+          showTableOfContents={true}
           recordMap={recordMap}
           fullPage={true}
           darkMode={false}

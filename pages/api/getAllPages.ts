@@ -1,6 +1,5 @@
 import notion from "../../lib/notion";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getAllPagesInSpace } from "notion-utils";
 const rootNotionPageId: string = "b3ceeaa8404d4f82ad5c2dae07ea6acd";
 
 interface pageInfo {
@@ -15,6 +14,7 @@ export default async function handler(
   const traversePage = async () => {
     let pageInfo: pageInfo = {};
     let queue: string[] = [rootNotionPageId];
+
     while (queue.length > 0) {
       const searchPageId: string = queue.shift()!;
       if (searchPageId === undefined) continue;
@@ -22,7 +22,7 @@ export default async function handler(
 
       Object.keys(recordMap.block).forEach((blockId) => {
         const blockValue = recordMap.block[blockId].value;
-        if (blockValue.type === "page" && blockValue?.properties?.title) {
+        if (blockValue?.type === "page" && blockValue?.properties?.title) {
           const title = blockValue.properties.title[0][0];
           if (!pageInfo[blockValue.id]) {
             queue.push(blockValue.id);

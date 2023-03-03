@@ -76,13 +76,14 @@ export default function WrappedComponent(props: any) {
 
     if (document.readyState === "complete" && isLoaded === "pending") {
       if (isAdjusted) return;
-      const aTags = document.querySelectorAll("a");
-
+      
       // 노션 게시글 html 트리에 직접 접근하여 a 태그를 모두 div태그로 바꾼 후
       // a 태그의 href 경로를 onclick 이벤트로 바꾸어 페이지 새로고침이 일어나지 않게 함
       // Todo: react-notion-x 라이브러리가 개선되면 수정하기
+      const aTags = document.querySelectorAll("a");
       for (let i = 0; i < aTags.length; i++) {
         const aTag = aTags[i];
+        console.log(aTag);
         aTag.onclick = pushPage;
       }
 
