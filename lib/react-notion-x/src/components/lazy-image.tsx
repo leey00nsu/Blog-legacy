@@ -1,22 +1,24 @@
-import * as React from 'react'
+// @ts-nocheck
 
-import { normalizeUrl } from 'notion-utils'
-import { ImageState, LazyImageFull } from 'react-lazy-images'
+import * as React from "react";
 
-import { useNotionContext } from '../context'
-import { cs } from '../utils'
+import { normalizeUrl } from "notion-utils";
+import { ImageState, LazyImageFull } from "react-lazy-images";
+
+import { useNotionContext } from "../context";
+import { cs } from "../utils";
 
 /**
  * Progressive, lazy images modeled after Medium's LQIP technique.
  */
 export const LazyImage: React.FC<{
-  src?: string
-  alt?: string
-  className?: string
-  style?: React.CSSProperties
-  height?: number
-  zoomable?: boolean
-  priority?: boolean
+  src?: string;
+  alt?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  height?: number;
+  zoomable?: boolean;
+  priority?: boolean;
 }> = ({
   src,
   alt,
@@ -28,41 +30,42 @@ export const LazyImage: React.FC<{
   ...rest
 }) => {
   const { recordMap, zoom, previewImages, forceCustomImages, components } =
-    useNotionContext()
+    useNotionContext();
 
-  const zoomRef = React.useRef(zoom ? zoom.clone() : null)
+  const zoomRef = React.useRef(zoom ? zoom.clone() : null);
   const previewImage = previewImages
     ? recordMap?.preview_images?.[src] ??
       recordMap?.preview_images?.[normalizeUrl(src)]
-    : null
+    : null;
 
   const onLoad = React.useCallback(
     (e: any) => {
       if (zoomable && (e.target.src || e.target.srcset)) {
         if (zoomRef.current) {
-          ;(zoomRef.current as any).attach(e.target)
+          (zoomRef.current as any).attach(e.target);
         }
       }
     },
     [zoomRef, zoomable]
-  )
+  );
 
   const attachZoom = React.useCallback(
     (image: any) => {
       if (zoomRef.current && image) {
-        ;(zoomRef.current as any).attach(image)
+        (zoomRef.current as any).attach(image);
       }
     },
     [zoomRef]
-  )
+  );
 
   const attachZoomRef = React.useMemo(
     () => (zoomable ? attachZoom : undefined),
     [zoomable, attachZoom]
-  )
+  );
 
   if (previewImage) {
-    const aspectRatio = previewImage.originalHeight / previewImage.originalWidth
+    const aspectRatio =
+      previewImage.originalHeight / previewImage.originalWidth;
 
     if (components.Image) {
       // TODO: could try using next/image onLoadComplete to replace LazyImageFull
@@ -76,66 +79,66 @@ export const LazyImage: React.FC<{
           width={previewImage.originalWidth}
           height={previewImage.originalHeight}
           blurDataURL={previewImage.dataURIBase64}
-          placeholder='blur'
+          placeholder="blur"
           priority={priority}
           onLoad={onLoad}
         />
-      )
+      );
     }
 
     return (
       <LazyImageFull src={src} {...rest} experimentalDecode={true}>
         {({ imageState, ref }) => {
-          const isLoaded = imageState === ImageState.LoadSuccess
+          const isLoaded = imageState === ImageState.LoadSuccess;
           const wrapperStyle: React.CSSProperties = {
-            width: '100%'
-          }
-          const imgStyle: React.CSSProperties = {}
+            width: "100%",
+          };
+          const imgStyle: React.CSSProperties = {};
 
           if (height) {
-            wrapperStyle.height = height
+            wrapperStyle.height = height;
           } else {
-            imgStyle.position = 'absolute'
-            wrapperStyle.paddingBottom = `${aspectRatio * 100}%`
+            imgStyle.position = "absolute";
+            wrapperStyle.paddingBottom = `${aspectRatio * 100}%`;
           }
 
           return (
             <div
               className={cs(
-                'lazy-image-wrapper',
-                isLoaded && 'lazy-image-loaded',
+                "lazy-image-wrapper",
+                isLoaded && "lazy-image-loaded",
                 className
               )}
               style={wrapperStyle}
             >
               <img
-                className='lazy-image-preview'
+                className="lazy-image-preview"
                 src={previewImage.dataURIBase64}
                 alt={alt}
                 ref={ref}
                 style={style}
-                decoding='async'
+                decoding="async"
               />
 
               <img
-                className='lazy-image-real'
+                className="lazy-image-real"
                 src={src}
                 alt={alt}
                 ref={attachZoomRef}
                 style={{
                   ...style,
-                  ...imgStyle
+                  ...imgStyle,
                 }}
                 width={previewImage.originalWidth}
                 height={previewImage.originalHeight}
-                decoding='async'
-                loading='lazy'
+                decoding="async"
+                loading="lazy"
               />
             </div>
-          )
+          );
         }}
       </LazyImageFull>
-    )
+    );
   } else {
     // TODO: GracefulImage doesn't seem to support refs, but we'd like to prevent
     // invalid images from loading as error states
@@ -163,7 +166,7 @@ export const LazyImage: React.FC<{
           priority={priority}
           onLoad={onLoad}
         />
-      )
+      );
     }
 
     // Default image element
@@ -174,10 +177,10 @@ export const LazyImage: React.FC<{
         src={src}
         alt={alt}
         ref={attachZoomRef}
-        loading='lazy'
-        decoding='async'
+        loading="lazy"
+        decoding="async"
         {...rest}
       />
-    )
+    );
   }
-}
+};

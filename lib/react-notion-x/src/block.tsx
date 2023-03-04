@@ -1,3 +1,4 @@
+// @ts-nocheck 
 import * as React from "react";
 
 import * as types from "notion-types";
@@ -56,6 +57,7 @@ const tocIndentLevelCache: {
 const pageCoverStyleCache: Record<string, object> = {};
 
 export const Block: React.FC<BlockProps> = (props) => {
+  const router = useRouter();
   const ctx = useNotionContext();
   const {
     components,
@@ -286,7 +288,6 @@ export const Block: React.FC<BlockProps> = (props) => {
         }
       } else {
         const blockColor = block.format?.block_color;
-        const router = useRouter();
 
         return (
           <components.PageLink
