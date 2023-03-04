@@ -10,30 +10,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { searchNotion } from "../lib/search-notion";
+import LoadingSpinner from "./UI/LoadingSpinner";
 
-export const NotionPage = ({
-  pageTitle,
-  recordMap,
-  rootPageId,
-  pageInfo,
-  adjust,
-}: {
+interface pageItems {
+  pageId: string;
   pageTitle: string;
   recordMap: ExtendedRecordMap;
-  rootPageId?: string;
   pageInfo: { [key: string]: string };
-  adjust: () => void;
-}) => {
-  useEffect(() => {
-    const isLoaded = sessionStorage.getItem("isLoaded");
-    if (isLoaded === "pending") {
-      adjust();
-    }
-  }, [recordMap]);
+}
 
-  if (!recordMap) {
-    return null;
+export const NotionPage = (props: { page: pageItems | null }) => {
+  useEffect(() => {
+    if (props.page) {
+      console.log("notionPage를 렌더링합니다.");
+      const contentElement = document.getElementById("content");
+      contentElement?.scrollTo(0, 0);
+    }
+  }, [props.page]);
+
+  if (!props.page) {
+    return <LoadingSpinner size="lg" full />;
   }
+  const { pageId, pageTitle, recordMap, pageInfo } = props.page;
 
   // prismjs : 코드 블럭 하이라이팅
   const Code = dynamic(() =>
@@ -107,26 +105,24 @@ export const NotionPage = ({
         <title>{pageTitle}</title>
       </Head>
 
-      <div className="hidden" id="adjust_checker">
-        <NotionRenderer
-          searchNotion={searchNotion}
-          components={{
-            Code,
-            Collection,
-            Equation,
-            Modal,
-            Pdf,
-            nextImage: Image,
-            nextLink: Link,
-          }}
-          showTableOfContents={true}
-          recordMap={recordMap}
-          fullPage={true}
-          darkMode={false}
-          rootPageId={rootPageId}
-          mapPageUrl={mapPageUrl}
-        />
-      </div>
+      <NotionRenderer
+        searchNotion={searchNotion}
+        components={{
+          Code,
+          Collection,
+          Equation,
+          Modal,
+          Pdf,
+          nextImage: Image,
+          nextLink: Link,
+        }}
+        showTableOfContents={true}
+        recordMap={recordMap}
+        fullPage={true}
+        darkMode={false}
+        rootPageId={pageId}
+        mapPageUrl={mapPageUrl}
+      />
     </>
   );
 };

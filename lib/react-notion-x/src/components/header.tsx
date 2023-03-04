@@ -10,6 +10,7 @@ import { SearchNotionFn } from "../types";
 import { cs } from "../utils";
 import { PageIcon } from "./page-icon";
 import { SearchDialog } from "./search-dialog";
+import { useRouter } from "next/router";
 
 export const Header: React.FC<{
   block: types.CollectionViewPageBlock | types.PageBlock;
@@ -29,6 +30,7 @@ export const Breadcrumbs: React.FC<{
   rootOnly?: boolean;
 }> = ({ block, rootOnly = false }) => {
   const { recordMap, mapPageUrl, components } = useNotionContext();
+  const router = useRouter();
 
   const breadcrumbs = React.useMemo(() => {
     const breadcrumbs = getPageBreadcrumbs(recordMap, block.id);
@@ -62,6 +64,11 @@ export const Breadcrumbs: React.FC<{
             <componentMap.pageLink
               className={cs("breadcrumb", breadcrumb.active && "active")}
               {...pageLinkProps}
+              onClick={(e) => {
+                e.preventDefault();
+                // console.log(mapPageUrl(block.id));
+                router.push(mapPageUrl(breadcrumb.pageId));
+              }}
             >
               {breadcrumb.icon && (
                 <PageIcon className="icon" block={breadcrumb.block} />

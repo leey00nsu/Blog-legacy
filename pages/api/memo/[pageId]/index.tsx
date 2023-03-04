@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  
   const pageId = req.body.pageId;
   const recordMap: ExtendedRecordMap = await notion.getPage(pageId);
 

@@ -14,17 +14,12 @@ interface pageItems {
   pageInfo: { [key: string]: string };
 }
 
-interface PageProps {
-  adjust: () => void;
-  isAdjusted: boolean;
-}
-
 // NotionPage를 렌더링하기 위한 경유 컴포넌트입니다.
 // 세션스토리지에 저장되어있는 노션링크를 확인하여 해당 한글경로로 api를 요청하여
 // 해당 노션페이지를 받아옵니다.
-export default function Page(props: PageProps) {
+export default function Page(props: any) {
   const router = useRouter();
-  const [page, setPage] = useState<pageItems>();
+  const [page, setPage] = useState<pageItems | null>(null);
   const [is404, setIs404] = useState(false);
 
   useEffect(() => {
@@ -71,25 +66,18 @@ export default function Page(props: PageProps) {
         recordMap: page.recordMap,
         pageInfo: pageInfo.pageInfo,
       });
-      sessionStorage.setItem("isLoaded", "pending");
     };
-    if (props.isAdjusted === false) {
-      fetchData();
-    }
-  }, [props.isAdjusted]);
+    fetchData();
+    console.log("change Route");
 
-  if (page && !is404) {
-    return (
-      <NotionPage
-        adjust={props.adjust}
-        recordMap={page["recordMap"]}
-        pageTitle={page["pageTitle"]}
-        rootPageId={page["pageId"]}
-        pageInfo={page["pageInfo"]}
-      />
-    );
-  }
+    return () => {
+      setPage(null);
+      console.log("page 정보를 초기화합니다.");
+    };
+  }, [router]);
+
+  return <NotionPage page={page} />;
 
   //Todo: 404 페이지
-  return <></>;
+  return <LoadingSpinner size="lg" full />;
 }
