@@ -7,9 +7,6 @@
 }
 
 /* react-notion-x 기본 css 오버라이드 */
-.notion-page-cover {
-  @apply rounded-3xl;
-}
 
 pre[class~="language-python"]::before {
   content: "python";
@@ -33,8 +30,4 @@ pre[class~="language-javascript"]::before {
 
 pre[class*="language-"] {
   padding: 2rem;
-}
-
-.notion-code {
-  @apply rounded-2xl;
 }
