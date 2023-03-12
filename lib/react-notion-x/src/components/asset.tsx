@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react'
 
 import { BaseContentBlock, Block } from 'notion-types'

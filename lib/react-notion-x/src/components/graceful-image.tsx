@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react'
 
 import { Img, ImgProps } from 'react-image'

@@ -1,4 +1,4 @@
-// @ts-nocheck 
+// @ts-nocheck
 import * as React from "react";
 
 import * as types from "notion-types";
@@ -769,7 +769,7 @@ export const Block: React.FC<BlockProps> = (props) => {
       const blockPointerId = block?.format?.alias_pointer?.id;
       const linkedBlock = recordMap.block[blockPointerId]?.value;
       if (!linkedBlock) {
-        console.log('"alias" missing block', blockPointerId);
+        // console.log('"alias" missing block', blockPointerId);
         return null;
       }
 

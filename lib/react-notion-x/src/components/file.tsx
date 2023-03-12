@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react'
 
 import { FileBlock } from 'notion-types'

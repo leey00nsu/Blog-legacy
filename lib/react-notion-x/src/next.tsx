@@ -50,5 +50,5 @@ export const wrapNextLink = (NextLink: any): React.FC<any> =>
     locale,
     ...linkProps
   }) {
-    return <div >a</div>;
+    return <div>a</div>;
   };
