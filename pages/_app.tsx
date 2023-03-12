@@ -1,4 +1,5 @@
-import "react-notion-x/src/styles.css"; // react-notion-x core styles
+import "../lib/react-notion-x/src/styles.css";
+// import "react-notion-x/src/styles.css"; // react-notion-x core styles
 import "prismjs/themes/prism-tomorrow.css"; // prism code syntax highlighting
 import "katex/dist/katex.min.css"; // react-notion-x equations
 import "../styles/globals.css";

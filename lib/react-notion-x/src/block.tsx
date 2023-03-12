@@ -227,7 +227,9 @@ export const Block: React.FC<BlockProps> = (props) => {
                       <div
                         className={cs(
                           "notion-page-content",
-                          hasAside && "notion-page-content-has-aside",
+                          hasAside
+                            ? "notion-page-content-has-aside"
+                            : "notion-page-content-no-aside",
                           hasToc && "notion-page-content-has-toc"
                         )}
                       >
